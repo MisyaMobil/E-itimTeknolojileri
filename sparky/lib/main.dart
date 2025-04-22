@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sparky/games/memory_game.dart';
 import 'screens/chat_screen.dart';
 
 void main() {
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Sparky',
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: ChatScreen(),
+      home: MemoryGame(),
     );
   }
 }
