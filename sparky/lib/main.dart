@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sparky/games/find_in_image_game.dart';
 import 'package:sparky/games/memory_game.dart';
 import 'screens/chat_screen.dart';
 

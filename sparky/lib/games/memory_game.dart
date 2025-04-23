@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:flutter/services.dart';
 
 class MemoryGame extends StatefulWidget {
   const MemoryGame({super.key});
@@ -11,41 +12,50 @@ class MemoryGame extends StatefulWidget {
 class _MemoryGameState extends State<MemoryGame> {
   final AudioPlayer _audioPlayer = AudioPlayer();
 
-  // Kart çiftleri
-  final List<String> cardPairs = [
-    '🐶',
-    '🐶',
-    '🐱',
-    '🐱',
-    '🐭',
-    '🐭',
-    '🐹',
-    '🐹',
-    '🐰',
-    '🐰',
-    '🦊',
-    '🦊',
-    '🐻',
-    '🐻',
-    '🐼',
-    '🐼',
+  // Türkçe - İngilizce kelime çiftleri (ikili kartlar)
+  final List<Map<String, String>> cardPairs = [
+    {'Türkçe': 'Köpek', 'İngilizce': 'Dog'},
+    {'Türkçe': 'Kedi', 'İngilizce': 'Cat'},
+    {'Türkçe': 'Fare', 'İngilizce': 'Mouse'},
+    {'Türkçe': 'Kuş', 'İngilizce': 'Bird'},
+    {'Türkçe': 'Ayı', 'İngilizce': 'Bear'},
+    {'Türkçe': 'Araba', 'İngilizce': 'Car'},
+    {'Türkçe': 'Masa', 'İngilizce': 'Table'},
+    {'Türkçe': 'Bilgisayar', 'İngilizce': 'Computer'},
+    {'Türkçe': 'Kalem', 'İngilizce': 'Pencil'},
   ];
 
-  List<String> cards = [];
+  List<Map<String, String>> cards = [];
   List<int> selectedIndices = [];
-  List<bool> matchedCards = []; // Eşleşen kartları takip etmek için
+  List<bool> matchedCards = [];
   int pairsFound = 0;
   bool isProcessing = false;
 
   @override
   void initState() {
     super.initState();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     startGame();
   }
 
   void startGame() {
     setState(() {
-      cards = List.from(cardPairs)..shuffle();
+      // Kart çiftlerini karıştırıp oluşturuyoruz
+      cards = [];
+      for (var pair in cardPairs) {
+        cards.add({
+          "Kelime": pair["Türkçe"]!,
+          "Anlam": pair["İngilizce"]!,
+        }); // Türkçe kart
+        cards.add({
+          "Kelime": pair["İngilizce"]!,
+          "Anlam": pair["Türkçe"]!,
+        }); // İngilizce kart
+      }
+      cards.shuffle(); // Kartları karıştırıyoruz
       selectedIndices = [];
       matchedCards = List.filled(cards.length, false);
       pairsFound = 0;
@@ -77,7 +87,9 @@ class _MemoryGameState extends State<MemoryGame> {
     play("CardFlip");
     if (selectedIndices.length == 2) {
       isProcessing = true;
-      if (cards[selectedIndices[0]] == cards[selectedIndices[1]]) {
+      // Türkçe - İngilizce eşleşmesi kontrolü
+      if ((cards[selectedIndices[0]]['Kelime'] ==
+          cards[selectedIndices[1]]['Anlam'])) {
         Future.delayed(const Duration(milliseconds: 500), () {
           setState(() {
             matchedCards[selectedIndices[0]] = true;
@@ -88,7 +100,7 @@ class _MemoryGameState extends State<MemoryGame> {
             isProcessing = false;
           });
 
-          if (pairsFound == cardPairs.length ~/ 2) {
+          if (pairsFound == cardPairs.length) {
             showGameWonDialog();
           }
         });
@@ -135,10 +147,8 @@ class _MemoryGameState extends State<MemoryGame> {
       body: GridView.builder(
         padding: const EdgeInsets.all(16),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 4,
-          crossAxisSpacing: 8,
-          mainAxisSpacing: 8,
-          childAspectRatio: 0.8,
+          crossAxisCount: 3, // 4 sütun olacak
+          childAspectRatio: 1, // Kartlar kare şeklinde olacak
         ),
         itemCount: cards.length,
         itemBuilder: (context, index) {
@@ -156,8 +166,8 @@ class _MemoryGameState extends State<MemoryGame> {
                 child:
                     selectedIndices.contains(index)
                         ? Text(
-                          cards[index],
-                          style: const TextStyle(fontSize: 36),
+                          cards[index]['Kelime'] ?? '',
+                          style: const TextStyle(fontSize: 24),
                         )
                         : const Text('?', style: TextStyle(fontSize: 24)),
               ),
