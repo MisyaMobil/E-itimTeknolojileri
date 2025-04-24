@@ -126,16 +126,15 @@ class KayitOl extends StatelessWidget {
                       height: 50,
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const GirisYap(),
-                            ),
-                          );
+                          Navigator.pushNamed(context, '/login');
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              const Color.fromARGB(255, 255, 154, 21),
+                          backgroundColor: const Color.fromARGB(
+                            255,
+                            255,
+                            154,
+                            21,
+                          ),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
@@ -161,12 +160,7 @@ class KayitOl extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const GirisYap(),
-                              ),
-                            );
+                            Navigator.pushNamed(context, '/login');
                           },
                           child: const Text(
                             'Giriş Yap',
@@ -213,7 +207,7 @@ class KayitOl extends StatelessWidget {
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
-                                    color: Colors.blue, // Google mavi
+                                    color: Colors.blue,
                                   ),
                                 ),
                                 Positioned(
@@ -224,7 +218,7 @@ class KayitOl extends StatelessWidget {
                                     height: 6,
                                     decoration: const BoxDecoration(
                                       shape: BoxShape.circle,
-                                      color: Colors.red, // Google kırmızı
+                                      color: Colors.red,
                                     ),
                                   ),
                                 ),
@@ -236,7 +230,7 @@ class KayitOl extends StatelessWidget {
                                     height: 6,
                                     decoration: const BoxDecoration(
                                       shape: BoxShape.circle,
-                                      color: Colors.green, // Google yeşil
+                                      color: Colors.green,
                                     ),
                                   ),
                                 ),
@@ -248,7 +242,7 @@ class KayitOl extends StatelessWidget {
                                     height: 6,
                                     decoration: const BoxDecoration(
                                       shape: BoxShape.circle,
-                                      color: Colors.yellow, // Google sarı
+                                      color: Colors.yellow,
                                     ),
                                   ),
                                 ),
@@ -264,28 +258,6 @@ class KayitOl extends StatelessWidget {
             ],
           ),
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.white,
-        selectedItemColor: Colors.deepPurple,
-        unselectedItemColor: Colors.grey,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.smart_toy),
-            label: 'AI',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Ana Sayfa',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profil',
-          ),
-        ],
-        onTap: (index) {
-          // Bottom navigation bar item'larına tıklandığında yapılacak işlemler
-        },
       ),
     );
   }

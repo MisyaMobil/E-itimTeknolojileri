@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'kayit_ol.dart';
+import 'register.dart';
 import 'giris_yap.dart';
 // Yeni sayfayı import ediyoruz
 
@@ -44,18 +44,12 @@ class Giris extends StatelessWidget {
                   SizedBox(height: 20),
                   Text(
                     'Bu heyecan verici yolculukta',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                    ),
+                    style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                   SizedBox(height: 20),
                   Text(
                     'İngilizce öğrenmeye hazırmısın',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                    ),
+                    style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                 ],
               ),
@@ -83,12 +77,7 @@ class Giris extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {
                   // Kayıt sayfasına yönlendirme
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const KayitOl(),
-                    ),
-                  );
+                  Navigator.pushNamed(context, '/register');
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromARGB(255, 255, 154, 21),
@@ -115,28 +104,6 @@ class Giris extends StatelessWidget {
             ),
           ],
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.white,
-        selectedItemColor: Colors.grey,
-        unselectedItemColor: Colors.grey,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.smart_toy),
-            label: 'AI',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Ana Sayfa',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profil',
-          ),
-        ],
-        onTap: (index) {
-          // Bottom navigation bar işlemleri
-        },
       ),
     );
   }

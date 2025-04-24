@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'kayit_ol.dart';
+import 'register.dart';
 
 class GirisYap extends StatelessWidget {
   const GirisYap({super.key});
@@ -87,11 +87,16 @@ class GirisYap extends StatelessWidget {
                       height: 50,
                       child: ElevatedButton(
                         onPressed: () {
-                          // Giriş işlemi
+                          // Giriş başarılı olduğunda chat ekranına yönlendir
+                          Navigator.pushNamed(context, '/chat');
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              const Color.fromARGB(255, 255, 154, 21),
+                          backgroundColor: const Color.fromARGB(
+                            255,
+                            255,
+                            154,
+                            21,
+                          ),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
@@ -117,12 +122,7 @@ class GirisYap extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const KayitOl(),
-                              ),
-                            );
+                            Navigator.pushNamed(context, '/register');
                           },
                           child: const Text(
                             'Kayıt ol',
@@ -220,28 +220,6 @@ class GirisYap extends StatelessWidget {
             ],
           ),
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.white,
-        selectedItemColor: Colors.grey,
-        unselectedItemColor: Colors.grey,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.smart_toy),
-            label: 'AI',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Ana Sayfa',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profil',
-          ),
-        ],
-        onTap: (index) {
-          // Bottom navigation bar işlemleri
-        },
       ),
     );
   }
