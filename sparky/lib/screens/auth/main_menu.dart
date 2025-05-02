@@ -6,7 +6,7 @@ class MainMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF87CEEB), // Açık mavi arka plan
+      backgroundColor: const Color(0xFF87CEEB),
       appBar: AppBar(
         title: const Text(
           'ANA MENÜ',
@@ -16,102 +16,191 @@ class MainMenu extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        backgroundColor: Colors.green,
+        backgroundColor: const Color(0xFF4252B4),
         centerTitle: true,
         shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
+          borderRadius: BorderRadius.vertical(bottom: Radius.circular(25)),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        color: const Color(0xFF87CEEB),
         child: Column(
           children: [
+            const SizedBox(height: 20),
             // Logo Container
             Container(
               width: double.infinity,
-              height: 200,
-              decoration: BoxDecoration(
-                color: const Color(0xFF87CEEB), // Arka plan ile aynı renk
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Image.asset(
-                  'assets/images/sparky_logo.png',
-                  fit: BoxFit.contain,
-                ),
+              height: MediaQuery.of(context).size.height * 0.35,
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Image.asset(
+                'assets/images/sparky_logo.png',
+                fit: BoxFit.contain,
               ),
             ),
-            const SizedBox(height: 40),
-            // Menü butonları grid
-            Expanded(
-              child: GridView.count(
-                crossAxisCount: 2,
-                mainAxisSpacing: 20,
-                crossAxisSpacing: 20,
+            const SizedBox(height: 30),
+            // Menu buttons
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              child: Column(
                 children: [
-                  _buildMenuButton('Kelime Öğren', Icons.book, () {
-                    // Kelime öğren sayfasına yönlendirme
-                  }),
-                  _buildMenuButton('Yapay Zeka\nSparky', Icons.smart_toy, () {
-                    // Yapay zeka sayfasına yönlendirme
-                  }),
-                  _buildMenuButton('Okuma Metni', Icons.menu_book, () {
-                    // Okuma metni sayfasına yönlendirme
-                  }),
-                  _buildMenuButton('Video İzle', Icons.play_circle_fill, () {
-                    // Video izle sayfasına yönlendirme
-                  }),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: _buildMenuButton(
+                          'Kelime Öğren',
+                          'assets/icons/abc_icon.png',
+                          () {},
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: _buildMenuButton(
+                          'Yapay Zeka\nSparky',
+                          'assets/icons/robot_icon.png',
+                          () {},
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: _buildMenuButton(
+                          'Okuma Metni',
+                          'assets/icons/book_icon.png',
+                          () {},
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: _buildMenuButton(
+                          'Video İzle',
+                          'assets/icons/video_icon.png',
+                          () {},
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.white,
-        selectedItemColor: Colors.green,
-        unselectedItemColor: Colors.grey,
-        currentIndex: 1, // Ana sayfa seçili
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.games), label: 'Oyun'),
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Ana Sayfa'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profil'),
-        ],
-        onTap: (index) {
-          // Navigation bar item'larına tıklandığında yapılacak işlemler
-        },
+      bottomNavigationBar: Container(
+        height: 70,
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            // Game Controller Icon
+            IconButton(
+              icon: const Icon(
+                Icons.sports_esports_outlined,
+                size: 28,
+                color: Colors.black54,
+              ),
+              onPressed: () {},
+            ),
+            // Home Button with blue circle background
+            Container(
+              width: 60,
+              height: 60,
+              decoration: BoxDecoration(
+                color: const Color(0xFF4A90E2),
+                borderRadius: BorderRadius.circular(30),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0xFF4A90E2).withOpacity(0.3),
+                    blurRadius: 8,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: IconButton(
+                icon: const Icon(
+                  Icons.home_rounded,
+                  color: Colors.white,
+                  size: 32,
+                ),
+                onPressed: () {},
+              ),
+            ),
+            // Profile Icon
+            IconButton(
+              icon: const Icon(
+                Icons.person_outline,
+                size: 28,
+                color: Colors.black54,
+              ),
+              onPressed: () {},
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  Widget _buildMenuButton(String title, IconData icon, VoidCallback onPressed) {
-    return ElevatedButton(
-      onPressed: onPressed,
-      style: ElevatedButton.styleFrom(
-        backgroundColor: const Color(0xFF7A4DFF), // Yeni mor renk
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-        padding: const EdgeInsets.all(15),
+  Widget _buildMenuButton(
+    String title,
+    String iconPath,
+    VoidCallback onPressed,
+  ) {
+    return Container(
+      height: 120,
+      decoration: BoxDecoration(
+        color: const Color(0xFF8A4DFF),
+        borderRadius: BorderRadius.circular(20),
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            icon,
-            color: const Color(0xFFFF9A15), // Turuncu ikon rengi
-            size: 32,
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onPressed,
+          borderRadius: BorderRadius.circular(20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                _getIconData(iconPath),
+                size: 32,
+                color: const Color(0xFFFFB74D),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                title,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  color: Color(0xFFFFB74D),
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
           ),
-          const SizedBox(height: 8),
-          Text(
-            title,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              color: Color(0xFFFF9A15), // Turuncu yazı rengi
-              fontSize: 16,
-            ),
-          ),
-        ],
+        ),
       ),
     );
+  }
+
+  IconData _getIconData(String iconPath) {
+    // Temporary icon mapping until we have actual assets
+    switch (iconPath) {
+      case 'assets/icons/abc_icon.png':
+        return Icons.abc;
+      case 'assets/icons/robot_icon.png':
+        return Icons.smart_toy;
+      case 'assets/icons/book_icon.png':
+        return Icons.menu_book;
+      case 'assets/icons/video_icon.png':
+        return Icons.play_circle_outline;
+      default:
+        return Icons.error;
+    }
   }
 }
