@@ -15,7 +15,7 @@ class Giris extends StatelessWidget {
           'Bende seni bekliyordum!',
           style: TextStyle(color: Colors.white, fontSize: 18),
         ),
-        backgroundColor: Colors.green,
+        backgroundColor: const Color(0xFF4252B4),
         centerTitle: true,
         toolbarHeight: 45, // Daha ince başlık
       ),
@@ -76,7 +76,6 @@ class Giris extends StatelessWidget {
               margin: const EdgeInsets.only(bottom: 20),
               child: ElevatedButton(
                 onPressed: () {
-                  // Kayıt sayfasına yönlendirme
                   Navigator.pushNamed(context, '/register');
                 },
                 style: ElevatedButton.styleFrom(

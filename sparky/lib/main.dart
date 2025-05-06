@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sparky/screens/auth/profile.dart';
 import 'screens/auth/login.dart';
 import 'screens/auth/register.dart';
 import 'screens/auth/giris_yap.dart';
@@ -21,14 +22,16 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         scaffoldBackgroundColor: const Color(0xFF87CEEB),
       ),
-      // İlk açılış sayfası olarak MainMenu sayfasını ayarlıyoruz
-      initialRoute: '/',
+      // İlk açılış sayfası olarak login sayfasını ayarladık
+      initialRoute: '/login',
       routes: {
-        '/': (context) => const MainMenu(), // Ana menü sayfası
-        '/login': (context) => const Giris(), // Giriş sayfası
-        '/register': (context) => const KayitOl(), // Kayıt ol sayfası
-        '/giris_yap': (context) => const GirisYap(), // Giriş yap sayfası
-        '/chat': (context) => ChatScreen(), // Chat ekranı
+        '/': (context) => const MainMenu(),
+        '/login': (context) => const Giris(),
+        '/register': (context) => const KayitOl(),
+        '/giris_yap': (context) => const GirisYap(),
+        '/chat': (context) => ChatScreen(),
+        '/main_menu': (context) => const MainMenu(),
+        '/profile': (context) => const ProfilSayfasi(),
       },
     );
   }

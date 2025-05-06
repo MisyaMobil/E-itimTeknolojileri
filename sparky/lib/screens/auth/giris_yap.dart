@@ -10,10 +10,10 @@ class GirisYap extends StatelessWidget {
       backgroundColor: const Color(0xFF87CEEB),
       appBar: AppBar(
         title: const Text(
-          'Kaldığımız yerden devam edelim',
+          'Hoş Geldin',
           style: TextStyle(color: Colors.white, fontSize: 18),
         ),
-        backgroundColor: Colors.green,
+        backgroundColor: const Color(0xFF4252B4),
         centerTitle: true,
         toolbarHeight: 45,
       ),

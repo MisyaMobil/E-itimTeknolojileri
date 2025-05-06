@@ -7,13 +7,13 @@ class KayitOl extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF87CEEB), // Açık mavi arka plan
+      backgroundColor: const Color(0xFF87CEEB),
       appBar: AppBar(
         title: const Text(
-          'Önce kayıt olmalıyız',
+          'Hoş Geldin',
           style: TextStyle(color: Colors.white, fontSize: 18),
         ),
-        backgroundColor: Colors.green,
+        backgroundColor: const Color(0xFF4252B4),
         centerTitle: true,
         toolbarHeight: 45,
       ),
@@ -33,7 +33,7 @@ class KayitOl extends StatelessWidget {
                   fit: BoxFit.contain,
                 ),
               ),
-              const SizedBox(height: 30), // Azaltılmış boşluk
+              const SizedBox(height: 30),
               // Kayıt formu
               Container(
                 width: double.infinity,
@@ -126,7 +126,7 @@ class KayitOl extends StatelessWidget {
                       height: 50,
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, '/login');
+                          Navigator.pushNamed(context, '/main_menu');
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color.fromARGB(
@@ -160,7 +160,7 @@ class KayitOl extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Navigator.pushNamed(context, '/login');
+                            Navigator.pushNamed(context, '/giris_yap');
                           },
                           child: const Text(
                             'Giriş Yap',
