@@ -14,7 +14,7 @@ class _FindInImageState extends State<FindInImage> {
   final List<Map<String, dynamic>> clickableAreas = [
     {'id': 'Apple', 'rect': Rect.fromLTWH(80, 100, 100, 100)},
     {'id': 'Banana', 'rect': Rect.fromLTWH(300, 200, 120, 120)},
-    {'id': 'Cherry', 'rect': Rect.fromLTWH(600, 150, 100, 100)},
+    {'id': 'Cherry', 'rect': Rect.fromLTWH(300, 150, 120, 120)},
   ];
 
   List<String> wordsToFind = ['Apple', 'Banana', 'Cherry'];
@@ -39,10 +39,25 @@ class _FindInImageState extends State<FindInImage> {
 
   void _handleTapDown(TapDownDetails details) {
     final tapPos = details.localPosition;
+
+    for (var area in clickableAreas) {
+      final rect = area['rect'] as Rect;
+      final id = area['id'] as String;
+
+      if (rect.contains(tapPos) && wordsToFind.contains(id)) {
+        setState(() {
+          _tapPosition = tapPos;
+          wordsToFind.remove(id);
+        });
+        return; // Birden fazla eşleşme varsa sadece birini işleme al
+      }
+    }
+
     setState(() {
       _tapPosition = tapPos;
     });
   }
+
 
   @override
   Widget build(BuildContext context) {
